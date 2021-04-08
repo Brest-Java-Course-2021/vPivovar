@@ -11,6 +11,7 @@
     <modules>
         <module>price-calc-OOP</module>
         <module>price-calc-Simple</module>
+        <module>documentation</module>
     </modules>
     <dependencies>
         <dependency>
