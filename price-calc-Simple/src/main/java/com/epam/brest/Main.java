@@ -25,29 +25,7 @@ public class Main {
 
     }
 
-    public static void main(String[] args) {
-
-//      TODO: Next steps:
-
-//      TODO - for the future : 1) Put the project status in a branch.
-
-//      TODO - immediately : 2) Develop the evolution of our application:
-
-//      TODO:   a) to replace variables of primitive types with business variables ( with classes - wrappers ).
-//      TODO:   b) to add simple dialog data input from keyboard ( There is no absolute user interface ).
-//      TODO:   с) to replace possible multiple if-else.
-//      TODO:   d) to replace possible multiple if-else using such patterns as "State".
-//      TODO:   e) to add ability to interrupt the data entry process.
-//      TODO:   f) to solve a problem: "the magic pushbutton" when all logic is in one class.
-//      TODO:   g) to add file(s) for prices ( *.csv )
-//      TODO:   h) to change startup template ( profile ) from "Main.main()" to Maven configuration
-
-//      TODO: 3) to resolve existing problems: There is no validation of input data, for example: user can enter negative values.
-//      TODO: 4) no Unit - tests: we have to restart the application for testing. ( must restart )
-//      TODO: This is very inconvenient, especially when we have integration tests.
-
-        System.out.println("Launching the application from the development environment:");
-
+    private static void theFirstCalcLogic_with_simple_dialog() {
         Double[] enteredValues = new Double[4];
 
         Scanner scanner = new Scanner(System.in);
@@ -85,10 +63,6 @@ public class Main {
             }
 
         } while (counter < 4);
-
-
-        return;
-
     }
 
     public static boolean isCorrectDoubleValue(String value) {
@@ -103,5 +77,36 @@ public class Main {
 
         return checkResult;
     }
+
+    public static void main(String[] args) {
+
+//      TODO: Next steps:
+
+//      TODO - for the future : 1) Put the project status in a branch.
+
+//      TODO - immediately : 2) Develop the evolution of our application:
+
+//      TODO:   a) to replace variables of primitive types with business variables ( with classes - wrappers ).
+//      TODO:   b) to add simple dialog data input from keyboard ( There is no absolute user interface ).
+//      TODO:   с) to replace possible multiple if-else.
+//      TODO:   d) to replace possible multiple if-else using such patterns as "State".
+//      TODO:   e) to add ability to interrupt the data entry process.
+//      TODO:   f) to solve a problem: "the magic pushbutton" when all logic is in one class.
+//      TODO:   g) to add file(s) for prices ( *.csv ) The price for transportation may vary
+//      TODO:   h) to change startup template ( profile ) from "Main.main()" to Maven configuration
+
+//      TODO: 3) to resolve existing problems: There is no validation of input data, for example: user can enter negative values.
+//      TODO: 4) no Unit - tests ( The code is not testable ): we have to restart the application for testing. ( must restart )
+//      TODO: This is very inconvenient, especially when we have integration tests.
+
+        System.out.println("Launching the application from the development environment:");
+
+        theFirstCalcLogic_with_simple_dialog();
+
+        return;
+
+    }
+
+
 
 }
