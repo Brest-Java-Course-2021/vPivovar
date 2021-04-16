@@ -1,5 +1,11 @@
 package com.epam.brest;
 
+import com.epam.brest.files.CSVFileReader;
+import com.epam.brest.files.FileReader;
+
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
@@ -65,6 +71,18 @@ public class Main {
         } while (counter < 4);
     }
 
+    public static void theSecondCalcLogic_with_simple_dialog() throws IOException {
+
+
+        FileReader distancePriceFileReader = new CSVFileReader();
+        // At the moment, here we assign the name of the interface, and we set the implementation later.
+        // In the future, the specific implementation will be chosen by Spring, depending on the configuration
+        Map<Integer, BigDecimal> distancePriceMap = distancePriceFileReader.readData("price-calc-Simple/src/main/resources/price_distance.csv");
+
+
+
+    }
+
     public static boolean isCorrectDoubleValue(String value) {
         boolean checkResult;
 
@@ -78,7 +96,7 @@ public class Main {
         return checkResult;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
 //      TODO: Next steps:
 
@@ -99,9 +117,12 @@ public class Main {
 //      TODO: 4) no Unit - tests ( The code is not testable ): we have to restart the application for testing. ( must restart )
 //      TODO: This is very inconvenient, especially when we have integration tests.
 
+//      Changes: A directory resources has been marked as "Resources root"
+
         System.out.println("Launching the application from the development environment:");
 
-        theFirstCalcLogic_with_simple_dialog();
+//      theFirstCalcLogic_with_simple_dialog();
+        theSecondCalcLogic_with_simple_dialog();
 
         return;
 
