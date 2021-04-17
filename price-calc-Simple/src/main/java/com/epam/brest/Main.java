@@ -2,9 +2,11 @@ package com.epam.brest;
 
 import com.epam.brest.files.CSVFileReader;
 import com.epam.brest.files.FileReader;
+import com.epam.brest.selector.PriceSelector;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -77,7 +79,50 @@ public class Main {
         FileReader distancePriceFileReader = new CSVFileReader();
         // At the moment, here we assign the name of the interface, and we set the implementation later.
         // In the future, the specific implementation will be chosen by Spring, depending on the configuration
-        Map<Integer, BigDecimal> distancePriceMap = distancePriceFileReader.readData("price-calc-Simple/src/main/resources/price_distance.csv");
+        Map<Integer, BigDecimal> distancePriceMap =
+                distancePriceFileReader.readData("price_distance.csv");
+
+        Map<Integer, BigDecimal> weightPriceMap =
+                distancePriceFileReader.readData("price_weight.csv");
+
+        PriceSelector priceSelector = new PriceSelector();
+
+        Double[] enteredValues = new Double[2];
+
+        Scanner scanner = new Scanner(System.in);
+        String inputValue;
+
+        int counter = 0;
+
+        do {
+
+            if (counter == 0) {
+                System.out.println("Please, enter distance");
+            } else if (counter == 1) {
+                System.out.println("Please, enter weight");
+            }
+
+            inputValue = scanner.next();
+            if (inputValue.equalsIgnoreCase("Q")) {
+                break;
+            } else if (isCorrectDoubleValue(inputValue)) {
+                enteredValues[counter] = Double.parseDouble(inputValue);
+                counter++;
+            } else {
+                System.out.println("Incorrect value: " + inputValue);
+            }
+
+//          BigDecimal price = priceSelector.selectPriceValue(distancePriceMap, new BigInteger(enteredValues[0].toString()));
+
+            if (counter == 2) {
+
+                Double result = enteredValues[0];  // * price.doubleValue() +
+//                              + enteredValues[2] * enteredValues[3];
+                System.out.println("Result = " + result);
+
+            }
+
+        } while (counter < 2);
 
 
 
