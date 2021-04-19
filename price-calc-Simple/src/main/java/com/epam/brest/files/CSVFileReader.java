@@ -36,12 +36,10 @@ public class CSVFileReader implements FileReader {
                 resultMap.put(Integer.valueOf(values[0]), new BigDecimal(values[1]));
             }
 
-
         }
 //      inputStreamReader and bufferReader will be closed automatically
 
-
-        return null;
+        return resultMap;
 
     }
 
