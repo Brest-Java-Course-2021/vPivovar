@@ -1,0 +1,6 @@
+java -cp ./target/price-calc-Simple-1.0-SNAPSHOT.jar com.epam.brest.Main
+
+java -jar ./target/price-calc-Simple-1.0-SNAPSHOT.jar
+-> no main manifest attribute, in ./target/price-calc-Simple-1.0-SNAPSHOT.jar
+
+

@@ -3,6 +3,7 @@
 .idea
 .gradle
 .target
+.out
 *.iml
 
 # Log file
