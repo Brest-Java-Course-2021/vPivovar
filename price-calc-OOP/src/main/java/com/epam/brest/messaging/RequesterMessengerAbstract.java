@@ -4,7 +4,7 @@ import com.epam.brest.requesters.Requester;
 import com.epam.brest.requesters.RequesterAbstract;
 import com.epam.brest.messengers.Messenger;
 
-public abstract class RequesterMessengerAbstract<R, I> extends RequesterAbstract<R, I> {
+public abstract class RequesterMessengerAbstract<I, R> extends RequesterAbstract<I, R> {
 
     protected final Messenger errorMessenger;
 
