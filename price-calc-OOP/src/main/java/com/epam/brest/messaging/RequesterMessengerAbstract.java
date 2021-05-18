@@ -1,7 +1,7 @@
 package com.epam.brest.messaging;
 
-import com.epam.brest.request.Requester;
-import com.epam.brest.request.RequesterAbstract;
+import com.epam.brest.requesters.Requester;
+import com.epam.brest.requesters.RequesterAbstract;
 import com.epam.brest.messengers.Messenger;
 
 public abstract class RequesterMessengerAbstract<R, I> extends RequesterAbstract<R, I> {

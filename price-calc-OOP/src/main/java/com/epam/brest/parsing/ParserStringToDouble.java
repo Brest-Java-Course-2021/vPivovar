@@ -1,8 +1,7 @@
 package com.epam.brest.parsing;
 
 import com.epam.brest.messengers.ErrorMessengerRequesterAbstract;
-import com.epam.brest.request.Requester;
-import com.epam.brest.messaging.RequesterMessengerAbstract;
+import com.epam.brest.requesters.Requester;
 import com.epam.brest.messengers.Messenger;
 
 public class ParserStringToDouble extends ErrorMessengerRequesterAbstract<Double, String> {

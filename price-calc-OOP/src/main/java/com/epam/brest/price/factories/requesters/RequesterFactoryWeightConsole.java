@@ -3,8 +3,8 @@ package com.epam.brest.price.factories.requesters;
 import com.epam.brest.messaging.MessageRequester;
 import com.epam.brest.messengers.MessengerOutput;
 import com.epam.brest.parsing.ParserStringToDouble;
-import com.epam.brest.request.Requester;
-import com.epam.brest.request.RequesterExternalValue;
+import com.epam.brest.requesters.Requester;
+import com.epam.brest.requesters.RequesterExternalValue;
 import com.epam.brest.validation.ValidatorRequest;
 
 import java.util.Scanner;

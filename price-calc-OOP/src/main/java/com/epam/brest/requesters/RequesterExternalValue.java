@@ -1,6 +1,4 @@
-package com.epam.brest.request;
-
-import com.epam.brest.request.Requester;
+package com.epam.brest.requesters;
 
 import java.util.Scanner;
 

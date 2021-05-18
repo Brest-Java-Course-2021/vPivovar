@@ -1,4 +1,4 @@
-package com.epam.brest.request;
+package com.epam.brest.requesters;
 
 public abstract class RequesterAbstract<R, I> implements Requester<R> {
 

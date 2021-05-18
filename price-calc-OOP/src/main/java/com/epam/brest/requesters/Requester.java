@@ -1,4 +1,4 @@
-package com.epam.brest.request;
+package com.epam.brest.requesters;
 
 public interface Requester<R> {
 

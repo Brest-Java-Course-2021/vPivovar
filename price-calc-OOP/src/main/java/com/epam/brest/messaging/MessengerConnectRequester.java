@@ -1,7 +1,7 @@
 package com.epam.brest.messaging;
 
 import com.epam.brest.messengers.MessengerOutput;
-import com.epam.brest.request.Requester;
+import com.epam.brest.requesters.Requester;
 
 import java.io.OutputStream;
 import java.util.function.BiFunction;

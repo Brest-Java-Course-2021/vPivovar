@@ -1,15 +1,16 @@
-package com.epam.brest.price.functions;
+package com.epam.brest.requesters;
 
 import com.epam.brest.price.PriceCalculator;
+import com.epam.brest.price.factories.requesters.RequesterFactory;
 import com.epam.brest.price.factories.requesters.RequesterFactoryDistanceConsole;
+import com.epam.brest.requesters.Requester;
 
 import java.util.TreeMap;
-import java.util.function.Function;
 
-public class DistanceFactoryPriceCalculator implements FunctionFactory<Void, Long> {
+public class DistanceFactoryPriceCalculator implements RequesterFactory<Long> {
 
     @Override
-    public Function<Void, Long> create() {
+    public Requester<Long> create() {
         var priceCurve = new TreeMap<Double, Long>();
         priceCurve.put(0D, 200L);
         priceCurve.put(1000D, 500L);
