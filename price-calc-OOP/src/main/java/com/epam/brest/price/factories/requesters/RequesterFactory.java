@@ -1,4 +1,4 @@
-package com.epam.brest.price.requesters;
+package com.epam.brest.price.factories.requesters;
 
 import com.epam.brest.price.factories.Factory;
 import com.epam.brest.request.Requester;

@@ -1,4 +1,4 @@
-package com.epam.brest.price.requesters;
+package com.epam.brest.price.factories.requesters;
 
 import com.epam.brest.messaging.MessageRequester;
 import com.epam.brest.messengers.MessengerOutput;
@@ -9,7 +9,7 @@ import com.epam.brest.validation.ValidatorRequest;
 
 import java.util.Scanner;
 
-public class RequesterFactoryDistanceConsole implements RequesterFactory<Double> {
+public class RequesterFactoryWeightConsole implements RequesterFactory<Double> {
 
     @Override
     public Requester<Double> create() {
@@ -18,7 +18,7 @@ public class RequesterFactoryDistanceConsole implements RequesterFactory<Double>
                         new ValidatorRequest<>(
                                 new ParserStringToDouble(
                                         new MessageRequester<>(
-                                                "Enter distance, km\n",
+                                                "Enter weight, kg\n",
                                                 System.out,
                                                 new RequesterExternalValue(new Scanner(System.in))
                                         ),
@@ -28,12 +28,12 @@ public class RequesterFactoryDistanceConsole implements RequesterFactory<Double>
                                 ),
                                 (x -> x > 0),
                                 new MessengerOutput(
-                                        "Distance cannot be less than 0\n",
+                                        "Weight cannot be less than 0\n",
                                         System.out)
                         ),
-                        (x -> x <= 10000),
+                        (x -> x <= 500),
                         new MessengerOutput(
-                                "We don't deliver products so far (10000 max)\n",
+                                "We don't deliver so heavy products (500 max)\n",
                                 System.out)
                 );
     }

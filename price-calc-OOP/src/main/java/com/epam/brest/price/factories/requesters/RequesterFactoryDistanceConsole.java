@@ -1,6 +1,6 @@
-package com.epam.brest.price.requesters;
+package com.epam.brest.price.factories.requesters;
 
-import com.epam.brest.messaging.MessageRequester;
+import com.epam.brest.messaging.MessengerBeforeRequester;
 import com.epam.brest.messengers.MessengerOutput;
 import com.epam.brest.parsing.ParserStringToDouble;
 import com.epam.brest.request.Requester;
@@ -9,7 +9,7 @@ import com.epam.brest.validation.ValidatorRequest;
 
 import java.util.Scanner;
 
-public class RequesterFactoryWeightConsole implements RequesterFactory<Double> {
+public class RequesterFactoryDistanceConsole implements RequesterFactory<Double> {
 
     @Override
     public Requester<Double> create() {
@@ -17,8 +17,8 @@ public class RequesterFactoryWeightConsole implements RequesterFactory<Double> {
                 new ValidatorRequest<>(
                         new ValidatorRequest<>(
                                 new ParserStringToDouble(
-                                        new MessageRequester<>(
-                                                "Enter weight, kg\n",
+                                        new MessengerBeforeRequester<>(
+                                                "Enter distance, km\n",
                                                 System.out,
                                                 new RequesterExternalValue(new Scanner(System.in))
                                         ),
@@ -28,12 +28,12 @@ public class RequesterFactoryWeightConsole implements RequesterFactory<Double> {
                                 ),
                                 (x -> x > 0),
                                 new MessengerOutput(
-                                        "Weight cannot be less than 0\n",
+                                        "Distance cannot be less than 0\n",
                                         System.out)
                         ),
-                        (x -> x <= 500),
+                        (x -> x <= 10000),
                         new MessengerOutput(
-                                "We don't deliver so heavy products (500 max)\n",
+                                "We don't deliver products so far (10000 max)\n",
                                 System.out)
                 );
     }
