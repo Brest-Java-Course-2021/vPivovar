@@ -14,12 +14,6 @@ public class DeliveryPriceCalculator implements Requester<Long> {
         this.distancePrice = distancePrice;
     }
 
-    public DeliveryPriceCalculator(RequesterFactory<Long> weightPriceFactory,
-                                   RequesterFactory<Long> distancePriceFactory) {
-        this.weightPrice = weightPriceFactory.create();
-        this.distancePrice = distancePriceFactory.create();
-    }
-
     @Override
     public Long request() {
         return weightPrice.request() + distancePrice.request();

@@ -1,19 +1,19 @@
 package com.epam.brest.price;
 
 import com.epam.brest.requesters.Requester;
+import com.epam.brest.requesters.RequesterAbstract;
 
 import java.util.List;
 import java.util.SortedMap;
 
-public class PriceCalculator implements Requester<Long> {
+public class PriceCalculator extends RequesterAbstract<Long, Double> {
 
     private final SortedMap<Double, Long> priceCurve;
-    private final Requester<Double> requester;
 
-    public PriceCalculator(SortedMap<Double, Long> priceCurve,
-                           Requester<Double> requester) {
+    public PriceCalculator(Requester<Double> requester,
+                           SortedMap<Double, Long> priceCurve) {
+        super(requester);
         this.priceCurve = priceCurve;
-        this.requester = requester;
     }
 
     @Override
