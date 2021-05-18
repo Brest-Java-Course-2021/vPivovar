@@ -1,11 +1,18 @@
 package com.epam.brest.model;
 
+import com.epam.brest.files.FileReader;
+import com.epam.brest.selector.PriceSelector;
+
 import java.math.BigDecimal;
 import java.util.Scanner;
 
-public class ReadData implements Status {
+public class ReadData extends AbstractStatus {
+    public ReadData(PriceSelector priceSelector, FileReader fileReader, Scanner scanner) {
+        super(priceSelector, fileReader, scanner);
+    }
+
     @Override
-    public Status handle(Scanner scanner) {
+    public Status handle() {
 
         if ( userData.size() < 2 ) {
             System.out.println(messages.get(userData.size()));
@@ -18,7 +25,7 @@ public class ReadData implements Status {
             }
 
         } else {
-            return new Calc();
+            return new Calc(priceSelector, fileReader, scanner);
         }
         return this;
     }

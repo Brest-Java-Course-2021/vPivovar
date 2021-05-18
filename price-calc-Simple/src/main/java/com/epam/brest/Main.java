@@ -6,6 +6,8 @@ import com.epam.brest.model.ReadData;
 import com.epam.brest.model.Status;
 import com.epam.brest.model.StatusType;
 import com.epam.brest.selector.PriceSelector;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -124,7 +126,7 @@ public class Main {
                 System.out.println("Distance price: " + distancePrice);
 
                 BigDecimal weightPrice = priceSelector.selectPriceValue(weightPriceMap,
-                        (BigDecimal)(enteredValues[1]));
+                        (BigDecimal) (enteredValues[1]));
                 System.out.println("Weight price: " + weightPrice);
 
                 BigDecimal result = enteredValues[0].multiply(distancePrice).add(
@@ -161,13 +163,32 @@ public class Main {
 //      The main method is converted to read the state of the system:
 //      The state pattern is used here:
 
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring-config.xml");
+        FileReader fileReader = applicationContext.getBean(FileReader.class);
+        PriceSelector priceSelector = applicationContext.getBean(PriceSelector.class);
+
         Scanner scanner = new Scanner(System.in);
 
-        Status currentStatus = new ReadData();
+        Status currentStatus = new ReadData(priceSelector, fileReader, scanner);
         while (currentStatus.getType() != StatusType.EXIT) {
-            currentStatus = currentStatus.handle(scanner);
+            currentStatus = currentStatus.handle();
         }
 
+
+    }
+
+    public static void theFourthCalcLogic_with_Spring() {
+
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring-config.xml");
+        FileReader fileReader = applicationContext.getBean(FileReader.class);
+        PriceSelector priceSelector = applicationContext.getBean(PriceSelector.class);
+
+        Scanner scanner = new Scanner(System.in);
+
+        Status currentStatus = new ReadData(priceSelector, fileReader, scanner);
+        while (currentStatus.getType() != StatusType.EXIT) {
+            currentStatus = currentStatus.handle();
+        }
 
     }
 
@@ -212,7 +233,8 @@ public class Main {
 
 //      theFirstCalcLogic_with_simple_dialog();
 //      theSecondCalcLogic_with_simple_dialog();
-        theThirdCalcLogic_with_simple_dialog();
+//      theThirdCalcLogic_with_simple_dialog();
+        theFourthCalcLogic_with_Spring();
 
         return;
 
