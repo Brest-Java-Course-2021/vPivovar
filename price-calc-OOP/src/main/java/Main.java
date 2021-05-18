@@ -1,4 +1,9 @@
 
+import com.epam.brest.price.DeliveryPriceCalculator;
+import com.epam.brest.price.functions.DistanceFactoryPriceCalculator;
+import com.epam.brest.price.functions.WeightFactoryPriceCalculator;
+import com.epam.brest.price.requesters.RequesterFactoryDistanceConsole;
+import com.epam.brest.price.requesters.RequesterFactoryWeightConsole;
 import com.epam.brest.request.RequesterExternalValue;
 import com.epam.brest.messaging.MessageRequester;
 import com.epam.brest.messengers.MessengerOutput;
@@ -11,31 +16,11 @@ public class Main {
 
     public static void main(String[] args) {
 
-        var a =
-                new ValidatorRequest<>(
-                        new ValidatorRequest<>(
-                                new ParserStringToDouble(
-                                        new MessageRequester<>(
-                                                "Enter double value:\n",
-                                                System.out,
-                                                new RequesterExternalValue(new Scanner(System.in))
-                                        ),
-                                        new MessengerOutput(
-                                                "Value not Valid\n",
-                                                System.out)
-                                ),
-                                (x -> x > 0),
-                                new MessengerOutput(
-                                        "Value cannot be less than 0\n",
-                                        System.out)
-                        ),
-                        (x -> x < 10000),
-                        new MessengerOutput(
-                                "Value cannot be bigger than 10000\n",
-                                System.out)
-                );
-
-        System.out.println(a.request());
+        var deliveryPriceCalculator = new DeliveryPriceCalculator(
+                new RequesterFactoryWeightConsole(),
+                new RequesterFactoryDistanceConsole(),
+                new WeightFactoryPriceCalculator(),
+                new DistanceFactoryPriceCalculator());
 
     }
 }
