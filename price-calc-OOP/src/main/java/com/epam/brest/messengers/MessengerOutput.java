@@ -1,4 +1,4 @@
-package requester;
+package com.epam.brest.messengers;
 
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;

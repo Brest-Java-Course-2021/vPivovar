@@ -1,5 +1,10 @@
 
-import requester.*;
+import com.epam.brest.request.RequesterExternalValue;
+import com.epam.brest.messaging.MessageRequester;
+import com.epam.brest.messengers.MessengerOutput;
+import com.epam.brest.parsing.ParserStringToDouble;
+import com.epam.brest.validation.ValidatorRequest;
+
 import java.util.Scanner;
 
 public class Main {
@@ -7,8 +12,8 @@ public class Main {
     public static void main(String[] args) {
 
         var a =
-                new ValidatorByPredicate<>(
-                        new ValidatorByPredicate<>(
+                new ValidatorRequest<>(
+                        new ValidatorRequest<>(
                                 new ParserStringToDouble(
                                         new MessageRequester<>(
                                                 "Enter double value:\n",

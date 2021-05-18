@@ -1,12 +1,16 @@
-package requester;
+package com.epam.brest.validation;
+
+import com.epam.brest.request.Requester;
+import com.epam.brest.messaging.RequesterMessengerAbstract;
+import com.epam.brest.messengers.Messenger;
 
 import java.util.function.Predicate;
 
-public class ValidatorByPredicate<R> extends RequesterMessengerAbstract<R, R> implements Validator<R> {
+public class ValidatorRequest<R> extends RequesterMessengerAbstract<R, R> implements Validator<R> {
 
     private final Predicate<R> predicate;
 
-    public ValidatorByPredicate(Requester<R> requester, Predicate<R> predicate, Messenger errorMessenger) {
+    public ValidatorRequest(Requester<R> requester, Predicate<R> predicate, Messenger errorMessenger) {
         super(requester, errorMessenger);
         this.predicate = predicate;
     }
