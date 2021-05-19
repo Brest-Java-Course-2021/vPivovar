@@ -1,4 +1,5 @@
 
+import com.epam.brest.exceptions.RequestFailureException;
 import com.epam.brest.exceptions.RequestInterruptedException;
 import com.epam.brest.messaging.MessengerConnectRequester;
 import com.epam.brest.price.DeliveryPriceCalculator;
@@ -11,48 +12,39 @@ import java.util.Arrays;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws RequestFailureException {
         new Main().run();
     }
 
-
-    public void run() {
+    public void run() throws RequestFailureException {
         try {
             new MessengerConnectRequester<>(
                     "Final price is ",
                     System.out,
                     new DeliveryPriceCalculator(
                             new DistancePriceCalculatorFactory(
-                                    new RepeaterRequest<>(
-                                            new DistanceRequesterFactory(
-                                                    new ConsoleRequesterBasicFactory().create()
 
-                                            ).create()
-                                    ),
+                                    new DistanceRequesterFactory(
+                                            new ConsoleRequesterBasicFactory().create()
+                                    ).create(),
                                     new RequesterSCVFileFactory(
-                                            getClass().getResourceAsStream("/distance_price.scv")
+                                            getClass().getResourceAsStream("/price_distance.csv")
                                     ).create()
-
                             ).create(),
                             new WeightPriceCalculatorFactory(
-                                    new RepeaterRequest<>(
-                                            new WeightRequesterFactory(
-                                                    new ConsoleRequesterBasicFactory().create()
 
-                                            ).create()
-                                    ),
+                                    new WeightRequesterFactory(
+                                            new ConsoleRequesterBasicFactory().create()
+                                    ).create(),
                                     new RequesterSCVFileFactory(
-                                            getClass().getResourceAsStream("/weight_price.scv")
+                                            getClass().getResourceAsStream("/price_weight.csv")
                                     ).create()
-
                             ).create()
                     ),
                     (m, v) -> m + new Dollar(v).asString()
             ).request();
-        } catch (RequestInterruptedException e) {
+        } catch (RequestInterruptedException | RequestFailureException e) {
             System.out.print("bye");
-        } catch (Exception e) {
-            System.out.print(e.getMessage() + Arrays.toString(e.getStackTrace()));
         }
     }
 }

@@ -3,8 +3,8 @@ package com.epam.brest.validation;
 import com.epam.brest.exceptions.RequestFailureException;
 import com.epam.brest.exceptions.RequestInterruptedException;
 import com.epam.brest.messengers.Messenger;
+import com.epam.brest.messengers.RequesterFailureMessengerAbstract;
 import com.epam.brest.requesters.Requester;
-import com.epam.brest.requesters.RequesterFailureMessengerAbstract;
 
 import java.util.function.Predicate;
 
