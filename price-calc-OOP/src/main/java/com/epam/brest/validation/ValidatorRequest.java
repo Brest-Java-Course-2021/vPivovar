@@ -6,7 +6,7 @@ import com.epam.brest.messengers.Messenger;
 
 import java.util.function.Predicate;
 
-public class ValidatorRequest<R> extends ErrorMessengerRequesterAbstract<R, R> implements Validator<R> {
+public class ValidatorRequest<R> extends ErrorMessengerRequesterAbstract<R, R> {
 
     private final Predicate<R> predicate;
     public ValidatorRequest(Requester<R> requester, Predicate<R> predicate, Messenger errorMessenger) {
@@ -25,9 +25,6 @@ public class ValidatorRequest<R> extends ErrorMessengerRequesterAbstract<R, R> i
         }
     }
 
-    @Override
-    public boolean isValid(R value) {
-        return predicate.test(value);
-    }
+ 
 
 }
