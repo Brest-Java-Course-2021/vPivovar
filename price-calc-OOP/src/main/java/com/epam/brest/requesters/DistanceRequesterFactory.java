@@ -1,5 +1,6 @@
 package com.epam.brest.requesters;
 
+import com.epam.brest.exceptions.RequesterCreationException;
 import com.epam.brest.messaging.MessengerBeforeRequester;
 import com.epam.brest.messengers.MessengerBasic;
 import com.epam.brest.parsing.ParserStringToDouble;
@@ -13,7 +14,7 @@ public class DistanceRequesterFactory extends RequesterFactoryAbstract<String, D
         }
 
         @Override
-        public Requester<Double> create() {
+        public Requester<Double> create() throws RequesterCreationException {
             return
                     new ValidatorRequesterFailureMessenger<>(
                             new ValidatorRequesterFailureMessenger<>(

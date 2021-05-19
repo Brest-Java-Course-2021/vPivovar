@@ -1,4 +1,4 @@
-package com.epam.brest.requesters.repeater;
+package com.epam.brest.requesters.repeaters;
 
 import com.epam.brest.exceptions.RequestFailureException;
 import com.epam.brest.exceptions.RequestInterruptedException;

@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.*;
 
-class ValidatorRequesterTest extends RequestTester {
+class ValidatorRequesterTest {
 
     @Test
     void validTest() {
