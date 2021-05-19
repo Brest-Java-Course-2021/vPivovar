@@ -1,5 +1,7 @@
 package com.epam.brest.price;
 
+import com.epam.brest.exceptions.RequestFailureException;
+import com.epam.brest.exceptions.RequestInterruptedException;
 import com.epam.brest.requesters.Requester;
 import com.epam.brest.requesters.RequesterAbstract;
 
@@ -17,7 +19,7 @@ public class PriceCalculator extends RequesterAbstract<Double, Long> {
     }
 
     @Override
-    public Long request() {
+    public Long request() throws RequestFailureException, RequestInterruptedException {
         var value = requester.request();
         var price = 0L;
         var it = priceCurve.entrySet().iterator();

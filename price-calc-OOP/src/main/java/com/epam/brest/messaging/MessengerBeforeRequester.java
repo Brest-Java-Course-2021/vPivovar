@@ -1,5 +1,7 @@
 package com.epam.brest.messaging;
 
+import com.epam.brest.exceptions.RequestFailureException;
+import com.epam.brest.exceptions.RequestInterruptedException;
 import com.epam.brest.requesters.Requester;
 
 import java.io.OutputStream;
@@ -11,7 +13,7 @@ public class MessengerBeforeRequester<R> extends MessengerRequesterAbstract<R> {
     }
 
     @Override
-    public R request() {
+    public R request() throws RequestFailureException, RequestInterruptedException {
         send();
         return requester.request();
     }

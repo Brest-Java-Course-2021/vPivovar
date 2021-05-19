@@ -1,5 +1,7 @@
 package com.epam.brest.messaging;
 
+import com.epam.brest.exceptions.RequestFailureException;
+import com.epam.brest.exceptions.RequestInterruptedException;
 import com.epam.brest.requesters.Requester;
 import com.epam.brest.messengers.MessengerOutput;
 
@@ -23,7 +25,7 @@ public class MessageRequester<R>  extends MessengerOutput implements Requester<R
     }
 
     @Override
-    public R request() {
+    public R request() throws RequestFailureException, RequestInterruptedException {
         send();
         return requester.request();
     }
