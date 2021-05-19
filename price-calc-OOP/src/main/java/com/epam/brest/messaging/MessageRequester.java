@@ -3,12 +3,12 @@ package com.epam.brest.messaging;
 import com.epam.brest.exceptions.RequestFailureException;
 import com.epam.brest.exceptions.RequestInterruptedException;
 import com.epam.brest.requesters.Requester;
-import com.epam.brest.messengers.MessengerOutput;
+import com.epam.brest.messengers.MessengerBasic;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 
-public class MessageRequester<R>  extends MessengerOutput implements Requester<R> {
+public class MessageRequester<R>  extends MessengerBasic implements Requester<R> {
     private final Requester<R> requester;
 
     public MessageRequester(String message, OutputStream outputStream, Requester<R> requester) {

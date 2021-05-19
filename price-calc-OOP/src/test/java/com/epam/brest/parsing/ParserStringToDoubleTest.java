@@ -2,7 +2,7 @@ package com.epam.brest.parsing;
 
 import com.epam.brest.exceptions.RequestFailureException;
 import com.epam.brest.exceptions.RequestInterruptedException;
-import com.epam.brest.messengers.MessengerOutput;
+import com.epam.brest.messengers.MessengerBasic;
 import com.epam.brest.requesters.RequestTester;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -13,7 +13,7 @@ import static org.mockito.Mockito.*;
 
 class ParserStringToDoubleTest extends RequestTester {
 
-    MessengerOutput error = mock(MessengerOutput.class);
+    MessengerBasic error = mock(MessengerBasic.class);
 
     @Test
     void requestNoErrorIfNumber() throws RequestFailureException, RequestInterruptedException {

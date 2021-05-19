@@ -2,7 +2,7 @@ package com.epam.brest.messaging;
 
 import com.epam.brest.exceptions.RequestFailureException;
 import com.epam.brest.exceptions.RequestInterruptedException;
-import com.epam.brest.messengers.MessengerOutput;
+import com.epam.brest.messengers.MessengerBasic;
 import com.epam.brest.requesters.Requester;
 
 import java.io.OutputStream;
@@ -24,7 +24,7 @@ public class MessengerConnectRequester<R> extends MessengerRequesterAbstract<R> 
     public R request() throws RequestFailureException, RequestInterruptedException {
         var requestResult = requester.request();
         var connectedMessage = connectFunction.apply(message, requestResult);
-        new MessengerOutput(connectedMessage, outputStream).send();
+        new MessengerBasic(connectedMessage, outputStream).send();
         return requestResult;
     }
 }

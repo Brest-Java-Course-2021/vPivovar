@@ -4,7 +4,7 @@ import com.epam.brest.messaging.MessengerConnectRequester;
 import com.epam.brest.price.DeliveryPriceCalculator;
 import com.epam.brest.requesters.*;
 import com.epam.brest.price.money.Dollar;
-import com.epam.brest.requesters.repeater.RequestRepeater;
+import com.epam.brest.requesters.repeater.RepeaterRequest;
 
 import java.util.Arrays;
 
@@ -18,17 +18,17 @@ public class Main {
                     System.out,
                     new DeliveryPriceCalculator(
 
-                            new RequestRepeater<>(
-                                    new DistanceFactoryPriceCalculator(
-                                            new RequesterFactoryDistance(
-                                                    new BasicConsoleRequestFactory()
+                            new RepeaterRequest<>(
+                                    new DistancePriceCalculatorFactory(
+                                            new DistanceRequesterFactory(
+                                                    new ConsoleRequesterBasicFactory()
                                             )
                                     ).create()
                             ),
-                            new RequestRepeater<>(
-                                    new WeightFactoryPriceCalculator(
-                                            new RequesterFactoryWeight(
-                                                    new BasicConsoleRequestFactory()
+                            new RepeaterRequest<>(
+                                    new WeightPriceCalculatorFactory(
+                                            new WeightRequesterFactory(
+                                                    new ConsoleRequesterBasicFactory()
                                             )
                                     ).create()
                             )

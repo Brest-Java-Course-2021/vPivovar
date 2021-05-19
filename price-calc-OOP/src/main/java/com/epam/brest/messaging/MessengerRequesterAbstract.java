@@ -1,11 +1,11 @@
 package com.epam.brest.messaging;
 
-import com.epam.brest.messengers.MessengerOutput;
+import com.epam.brest.messengers.MessengerBasic;
 import com.epam.brest.requesters.Requester;
 
 import java.io.OutputStream;
 
-public abstract class MessengerRequesterAbstract<R> extends MessengerOutput implements Requester<R> {
+public abstract class MessengerRequesterAbstract<R> extends MessengerBasic implements Requester<R> {
 
     protected final Requester<R> requester;
 

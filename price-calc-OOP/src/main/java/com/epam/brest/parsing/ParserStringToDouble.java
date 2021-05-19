@@ -2,11 +2,11 @@ package com.epam.brest.parsing;
 
 import com.epam.brest.exceptions.RequestFailureException;
 import com.epam.brest.exceptions.RequestInterruptedException;
-import com.epam.brest.messengers.ErrorMessengerRequesterAbstract;
+import com.epam.brest.messengers.RequesterFailureMessengerAbstract;
 import com.epam.brest.requesters.Requester;
 import com.epam.brest.messengers.Messenger;
 
-public class ParserStringToDouble extends ErrorMessengerRequesterAbstract<String, Double> {
+public class ParserStringToDouble extends RequesterFailureMessengerAbstract<String, Double> {
 
     public ParserStringToDouble(Requester<String> requester, Messenger errorMessenger) {
         super(requester, errorMessenger);

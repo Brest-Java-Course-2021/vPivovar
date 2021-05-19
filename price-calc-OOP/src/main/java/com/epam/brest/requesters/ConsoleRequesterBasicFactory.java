@@ -7,7 +7,7 @@ import com.epam.brest.requesters.commands.CommandEscapeInterrupter;
 import java.util.Scanner;
 
 
-public class BasicConsoleRequestFactory implements RequesterFactory<String> {
+public class ConsoleRequesterBasicFactory implements RequesterFactory<String> {
     @Override
     public Requester<String> create() {
         return

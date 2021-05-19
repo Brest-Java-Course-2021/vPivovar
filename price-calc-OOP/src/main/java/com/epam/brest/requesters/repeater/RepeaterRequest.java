@@ -5,9 +5,9 @@ import com.epam.brest.exceptions.RequestInterruptedException;
 import com.epam.brest.requesters.Requester;
 import com.epam.brest.requesters.RequesterAbstract;
 
-public class RequestRepeater<R> extends RequesterAbstract<R, R> {
+public class RepeaterRequest<R> extends RequesterAbstract<R, R> {
 
-    public RequestRepeater(Requester<R> requester) {
+    public RepeaterRequest(Requester<R> requester) {
         super(requester);
     }
 
