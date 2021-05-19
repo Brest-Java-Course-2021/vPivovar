@@ -9,12 +9,13 @@ import com.epam.brest.validation.ValidatorRequesterFailureMessenger;
 
 public class WeightRequesterFactory extends RequesterFactoryAbstract<String, Double> {
 
-    public WeightRequesterFactory(RequesterFactory<String> innerFactory) {
+//  public WeightRequesterFactory(RequesterFactory<String> innerFactory) {
+    public WeightRequesterFactory(Requester<String> innerFactory) {
         super(innerFactory);
     }
 
     @Override
-    public Requester<Double> create() throws RequesterCreationException {
+    public Requester<Double> create() { // throws RequesterCreationException {
         return
                 new ValidatorRequesterFailureMessenger<>(
                         new ValidatorRequesterFailureMessenger<>(
@@ -22,7 +23,8 @@ public class WeightRequesterFactory extends RequesterFactoryAbstract<String, Dou
                                         new MessengerBeforeRequester<>(
                                                 "Enter weight, kg\n",
                                                 System.out,
-                                                innerFactory.create()
+                                                // innerFactory.create()
+                                                innerRequester
                                         ),
                                         new MessengerBasic(
                                                 "You must enter a number\n",

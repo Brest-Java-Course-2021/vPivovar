@@ -17,7 +17,8 @@ public class RequesterSCVFileFactory implements RequesterFactory<SortedMap<Doubl
     }
 
     @Override
-    public Requester<SortedMap<Double, Long>> create() throws RequesterCreationException {
+//  public Requester<SortedMap<Double, Long>> create() throws RequesterCreationException {
+    public Requester<SortedMap<Double, Long>> create() {
         return new RequesterSCVFile(
                 new BufferedReader(
                         new InputStreamReader(inputStream)

@@ -11,11 +11,12 @@ import java.util.TreeMap;
 
 public class WeightPriceCalculatorFactory extends RequesterFactoryAbstract<Double, Long> {
 
-    private final RequesterFactory<SortedMap<Double, Long>> priceCurveFactory;
+//  private final RequesterFactory<SortedMap<Double, Long>> priceCurveFactory;
+    private final Requester<SortedMap<Double, Long>> priceCurveFactory;
 
-    public WeightPriceCalculatorFactory(RequesterFactory<Double> innerFactory,
-                                        RequesterFactory<SortedMap<Double, Long>> priceCurveFactory) {
-        super(innerFactory);
+    public WeightPriceCalculatorFactory(Requester<Double> innerRequester,
+                                        Requester<SortedMap<Double, Long>> priceCurveFactory) {
+        super(innerRequester);
         this.priceCurveFactory = priceCurveFactory;
     }
 
@@ -28,7 +29,7 @@ public class WeightPriceCalculatorFactory extends RequesterFactoryAbstract<Doubl
         priceCurve.put(400D, 5000L);
         return new PriceCalculator(innerFactory.create(), priceCurve);
     */
-    public Requester<Long> create() throws RequesterCreationException {
-        return new PriceCalculator(innerFactory.create(), priceCurveFactory.create());
+    public Requester<Long> create() {
+        return new PriceCalculator(innerRequester, priceCurveFactory);
     }
 }

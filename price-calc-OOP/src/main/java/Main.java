@@ -25,17 +25,23 @@ public class Main {
                             new RepeaterRequest<>(
                                     new DistancePriceCalculatorFactory(
                                             new DistanceRequesterFactory(
-                                                    new ConsoleRequesterBasicFactory()
-                                            ),
-                                            new RequesterSCVFileFactory(getClass().getResourceAsStream("/distance_price.scv"))
+                                                    new ConsoleRequesterBasicFactory().create()
+                                            ).create(),
+                                            new RequesterSCVFileFactory(
+                                                    getClass().getResourceAsStream("/distance_price.scv")
+
+                                            ).create()
                                     ).create()
                             ),
                             new RepeaterRequest<>(
                                     new WeightPriceCalculatorFactory(
                                             new WeightRequesterFactory(
-                                                    new ConsoleRequesterBasicFactory()
-                                            ),
-                                            new RequesterSCVFileFactory(getClass().getResourceAsStream("/weight_price.scv"))
+                                                    new ConsoleRequesterBasicFactory().create()
+                                            ).create(),
+                                            new RequesterSCVFileFactory(
+                                                    getClass().getResourceAsStream("/weight_price.scv")
+
+                                            ).create()
                                     ).create()
                             )
                     ),
@@ -45,6 +51,6 @@ public class Main {
             System.out.print(e.getMessage() + Arrays.toString(e.getStackTrace()));
         }
 
-    }
 
+    }
 }
