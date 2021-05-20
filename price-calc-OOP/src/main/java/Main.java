@@ -17,6 +17,7 @@ public class Main {
     }
 
     public void run() throws RequestFailureException {
+        var consoleRequester = new ConsoleRequesterBasicFactory().create();
         try {
             new MessengerConnectRequester<>(
                     "Final price is ",
@@ -25,19 +26,20 @@ public class Main {
                             new DistancePriceCalculatorFactory(
 
                                     new DistanceRequesterFactory(
-                                            new ConsoleRequesterBasicFactory().create()
+                                            consoleRequester // new ConsoleRequesterBasicFactory().create()
                                     ).create(),
                                     new RequesterSCVFileFactory(
-                                            getClass().getResourceAsStream("/price_distance.csv")
+                                            getClass().getResourceAsStream("price_distance.csv")
                                     ).create()
                             ).create(),
                             new WeightPriceCalculatorFactory(
 
                                     new WeightRequesterFactory(
-                                            new ConsoleRequesterBasicFactory().create()
+                                            consoleRequester // new ConsoleRequesterBasicFactory().create()
+
                                     ).create(),
                                     new RequesterSCVFileFactory(
-                                            getClass().getResourceAsStream("/price_weight.csv")
+                                            getClass().getResourceAsStream("price_weight.csv")
                                     ).create()
                             ).create()
                     ),
