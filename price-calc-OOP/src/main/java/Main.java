@@ -22,6 +22,8 @@ public class Main {
                     .create()
                     .request();
 
+//          new DeliveryPriceCalculatorFactory().create().request();
+
         } catch (RequestInterruptedException | RequestFailureException e) {
             System.out.print("bye");
         }
