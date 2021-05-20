@@ -1,14 +1,7 @@
-
 import com.epam.brest.exceptions.RequestFailureException;
 import com.epam.brest.exceptions.RequestInterruptedException;
-import com.epam.brest.messaging.MessengerConnectRequester;
-import com.epam.brest.price.DeliveryPriceCalculator;
-import com.epam.brest.price.factories.requesters.RequesterSCVFileFactory;
-import com.epam.brest.requesters.*;
-import com.epam.brest.price.money.Dollar;
-import com.epam.brest.requesters.repeaters.RepeaterRequest;
-
-import java.util.Arrays;
+import com.epam.brest.price.factories.DeliveryPriceCalculatorFactory;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Main {
 
@@ -17,34 +10,13 @@ public class Main {
     }
 
     public void run() throws RequestFailureException {
-        var consoleRequester = new ConsoleRequesterBasicFactory().create();
+
+        var appContext = new ClassPathXmlApplicationContext("spring-config.xml");
+
         try {
-            new MessengerConnectRequester<>(
-                    "Final price is ",
-                    System.out,
-                    new DeliveryPriceCalculator(
-                            new DistancePriceCalculatorFactory(
 
-                                    new DistanceRequesterFactory(
-                                            consoleRequester // new ConsoleRequesterBasicFactory().create()
-                                    ).create(),
-                                    new RequesterSCVFileFactory(
-                                            getClass().getResourceAsStream("price_distance.csv")
-                                    ).create()
-                            ).create(),
-                            new WeightPriceCalculatorFactory(
+            appContext.getBean(DeliveryPriceCalculatorFactory.class).create().request();
 
-                                    new WeightRequesterFactory(
-                                            consoleRequester // new ConsoleRequesterBasicFactory().create()
-
-                                    ).create(),
-                                    new RequesterSCVFileFactory(
-                                            getClass().getResourceAsStream("price_weight.csv")
-                                    ).create()
-                            ).create()
-                    ),
-                    (m, v) -> m + new Dollar(v).asString()
-            ).request();
         } catch (RequestInterruptedException | RequestFailureException e) {
             System.out.print("bye");
         }
