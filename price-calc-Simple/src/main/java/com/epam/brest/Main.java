@@ -2,6 +2,7 @@ package com.epam.brest;
 
 import com.epam.brest.files.CSVFileReader;
 import com.epam.brest.files.FileReader;
+import com.epam.brest.model.AbstractStatus;
 import com.epam.brest.model.ReadData;
 import com.epam.brest.model.Status;
 import com.epam.brest.model.StatusType;
