@@ -9,8 +9,11 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>documentation</artifactId>
+    <artifactId>epam-training-project-hr</artifactId>
     <packaging>pom</packaging>
+    <modules>
+        <module>model</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

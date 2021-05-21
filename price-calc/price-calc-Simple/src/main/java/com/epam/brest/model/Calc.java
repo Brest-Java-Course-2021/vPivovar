@@ -22,10 +22,10 @@ public class Calc extends AbstractStatus {
         try {
 
             Map<Integer, BigDecimal> distancePriceMap =
-                    fileReader.readData("price_distance.csv");
+                    fileReader.readData("price-calc-Simple/src/main/resources/price_distance.csv");
 
             Map<Integer, BigDecimal> weightPriceMap =
-                    fileReader.readData("price_weight.csv");
+                    fileReader.readData("price-calc-Simple/src/main/resources/price_weight.csv");
 
             System.out.println("Result: " + userData.get(0).multiply(priceSelector.selectPriceValue(distancePriceMap, userData.get(0)))
                     .add(userData.get(1).multiply(priceSelector.selectPriceValue(weightPriceMap,userData.get(1)))));

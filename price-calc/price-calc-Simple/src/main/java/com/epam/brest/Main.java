@@ -86,10 +86,10 @@ public class Main {
         // At the moment, here we assign the name of the interface, and we set the implementation later.
         // In the future, the specific implementation will be chosen by Spring, depending on the configuration
         Map<Integer, BigDecimal> distancePriceMap =
-                distancePriceFileReader.readData("price_distance.csv");
+                distancePriceFileReader.readData("price-calc-Simple/src/main/resources/price_distance.csv");
 
         Map<Integer, BigDecimal> weightPriceMap =
-                distancePriceFileReader.readData("price_weight.csv");
+                distancePriceFileReader.readData("price-calc-Simple/src/main/resources/price_weight.csv");
 
         PriceSelector priceSelector = new PriceSelector();
 
@@ -164,7 +164,7 @@ public class Main {
 //      The main method is converted to read the state of the system:
 //      The state pattern is used here:
 
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring-config.xml");
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("price-calc-Simple/src/main/resources/spring-config.xml");
         FileReader fileReader = applicationContext.getBean(FileReader.class);
         PriceSelector priceSelector = applicationContext.getBean(PriceSelector.class);
 
@@ -180,7 +180,7 @@ public class Main {
 
     public static void theFourthCalcLogic_with_Spring() {
 
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring-config.xml");
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("price-calc-Simple/src/main/resources/spring-config.xml");
         FileReader fileReader = applicationContext.getBean(FileReader.class);
         PriceSelector priceSelector = applicationContext.getBean(PriceSelector.class);
 
