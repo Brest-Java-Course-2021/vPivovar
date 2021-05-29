@@ -1,0 +1,10 @@
+It's true that the parent pom has already included the dependency declaration
+in the dependency management section.
+But it's not taken into account.
+To do so, we should execute the command to install the pom file in the local maven repo.
+
+mvn -f <the absolute path to the parent's pom file> install -N
+
+Be aware that when maven resolves dependencies,
+it always looks for pom files already available in the repo.
+Instead, local files are not taken into account.

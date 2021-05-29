@@ -1,6 +1,6 @@
 # Compiled class file
 *.class
-price-calc/.idea
+.idea
 .gradle
 .target
 .out

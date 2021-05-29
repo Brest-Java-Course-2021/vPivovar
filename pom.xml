@@ -18,6 +18,7 @@
         <module>documentation</module>
         <module>price-calc</module>
         <module>epam-training-project-hr</module>
+        <module>help</module>
     </modules>
 
 
