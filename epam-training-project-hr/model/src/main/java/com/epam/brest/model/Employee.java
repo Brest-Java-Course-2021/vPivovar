@@ -16,6 +16,10 @@ public class Employee {
 
     private Integer departmentId;
 
+    public Employee() {
+
+    }
+
     public Integer getEmployeeId() {
         return employeeId;
     }

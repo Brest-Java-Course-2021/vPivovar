@@ -7,7 +7,6 @@ import static org.junit.Assert.*;
 
 public class DepartmentDaoJdbcTest {
 
-
     private DepartmentDao departmentDao;
 
     @Test

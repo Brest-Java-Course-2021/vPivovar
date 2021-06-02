@@ -9,21 +9,18 @@ public class DepartmentTest {
 
     @Test
     public void getDepartmentNameConstructor() {
-
         Department department = new Department("IT");
         Assert.assertEquals("IT", department.getDepartmentName());
-
     }
 
     @Test
     public void getDepartmentNameSetter() {
-
         Department department = new Department();
         department.setDepartmentName("IT");
         Assert.assertEquals("IT", department.getDepartmentName());
 
 
-
     }
+
 
 }
