@@ -2,10 +2,10 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:jdbc="http://www.springframework.org/schema/jdbc"
-       xsi:shemaLocation="http://www.springframework.org/schema/beans
-                          http://www.springframework.org/schema/beans/spring-brans.xsd
-                          http://www.springframework.org/schema/jdbc
-                          http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://www.springframework.org/schema/jdbc
+                        http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 
@@ -15,6 +15,11 @@
         <property name="password" value="password"/>
 
     </bean>
+
+    <jdbc:initialize-database>
+        <jdbc:script location="classpath*:create-test-db.sql"/>
+        <jdbc:script location="classpath*:init-test-db.sql"/>
+    </jdbc:initialize-database>
 
 </beans>
 
