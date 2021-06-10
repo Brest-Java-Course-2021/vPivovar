@@ -2,6 +2,8 @@ package com.epam.brest.dao.jdbc;
 
 import com.epam.brest.dao.DepartmentDao;
 import com.epam.brest.model.Department;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -17,6 +19,8 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class DepartmentDaoJdbc implements DepartmentDao {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(DepartmentDaoJdbc.class);
 
     private static final String SQL_GET_ALL_DEPARTMENTS =
             "SELECT D.DEPARTMENT_ID, D.DEPARTMENT_NAME FROM DEPARTMENT AS D ORDER BY D.DEPARTMENT_NAME";
@@ -44,7 +48,8 @@ public class DepartmentDaoJdbc implements DepartmentDao {
     }
 
     @Override
-    public List<Department> findAll() {
+    public List findAll() {
+        LOGGER.debug("Find all departments");
 //      return namedParameterJdbcTemplate.query(SQL_GET_ALL_DEPARTMENTS, new DepartmentRowMapper());
         return namedParameterJdbcTemplate.query(SQL_GET_ALL_DEPARTMENTS, rowMapper);
     }
@@ -63,12 +68,14 @@ public class DepartmentDaoJdbc implements DepartmentDao {
 
     @Override
     public Optional<Department> findById(Integer departmentId) {
+        LOGGER.debug("Find department by id: {}", departmentId);
         SqlParameterSource sqlParameterSource = new MapSqlParameterSource("DEPARTMENT_ID", departmentId);
         return Optional.ofNullable((Department) namedParameterJdbcTemplate.queryForObject(SQL_GET_ALL_DEPARTMENT_BY_ID, sqlParameterSource, rowMapper));
     }
 
     @Override
     public Integer create(Department department) {
+        LOGGER.debug("Create department: {}", department);
         // TO DO: Check if exist a department with the same name
         KeyHolder keyHolder = new GeneratedKeyHolder();
         SqlParameterSource sqlParameterSource = new MapSqlParameterSource("DEPARTMENT_NAME", department.getDepartmentName());
@@ -80,11 +87,13 @@ public class DepartmentDaoJdbc implements DepartmentDao {
 
     @Override
     public Integer update(Department department) {
+        LOGGER.debug("Update department: {}", department);
         return null;
     }
 
     @Override
     public Integer delete(Integer departmentId) {
+        LOGGER.debug("Delete department by id: {}", departmentId);
         return null;
     }
 
