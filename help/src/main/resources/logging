@@ -1,0 +1,3 @@
+The descendant logger inherits the root logger's association with the ConsoleAppender with its association with FileAppender.
+Appenders are cumulative.
+We need to delete consoleAppender from com.epam logger or add additivity="false" setting to it.

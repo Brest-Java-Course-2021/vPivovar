@@ -27,4 +27,11 @@
       <module name="vPivovar" target="1.5" />
     </bytecodeTargetLevel>
   </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="dao" options="-Xlint:unchecked" />
+      <module name="model" options="-Xlint:unchecked" />
+      <module name="test-db" options="-Xlint:unchecked" />
+    </option>
+  </component>
 </project>
