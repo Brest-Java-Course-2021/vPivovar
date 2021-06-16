@@ -14,6 +14,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
+
+
+// We need to make sure that the data we send to the database matches the reference
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath*:test-dao.xml", "classpath*:test-db.xml"})
@@ -62,18 +66,35 @@ public class DepartmentDaoJdbcTest {
         // departmentDao.findById(999).get();
 
         Department expectedDepartment = departmentDao.findById(999).orElse(null);
-
     }
 
-    @Test
+    @Test//(IllegalArgumentException.class)
+    //  Since the tests are not executed in order - the data in the table may be different
     public void createDepartmentTest() {
 
         List<Department> departments = departmentDao.findAll();
         Assert.assertNotNull(departments);
         Assert.assertTrue(departments.size() > 0);
 
-        Department department = new Department("HR");
-        Integer result = departmentDao.create(department);
+        Integer result = departmentDao.create(new Department("HR"));
+
+        List<Department> realDepartments = departmentDao.findAll();
+        Assert.assertEquals(departments.size() + 1, realDepartments.size());
+
+        System.out.println("Result:" + result);
+        realDepartments.forEach(System.out::println);
+
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void createDepartmentWithTheSameTest() {
+
+        List<Department> departments = departmentDao.findAll();
+        Assert.assertNotNull(departments);
+        Assert.assertTrue(departments.size() > 0);
+
+        Integer result = departmentDao.create(new Department("HR"));
+        result = departmentDao.create(new Department("HR"));
 
 //      Integer result = departmentDao.create(department);
 
@@ -84,6 +105,52 @@ public class DepartmentDaoJdbcTest {
         realDepartments.forEach(System.out::println);
 
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void createDepartmentWithTheSameDiffCaseTest() {
+
+        List<Department> departments = departmentDao.findAll();
+        Assert.assertNotNull(departments);
+        Assert.assertTrue(departments.size() > 0);
+
+        Integer result = departmentDao.create(new Department("HR"));
+        result = departmentDao.create(new Department("hr"));
+
+        List<Department> realDepartments = departmentDao.findAll();
+        Assert.assertEquals(departments.size() + 1, realDepartments.size());
+
+        System.out.println("Result:" + result);
+        realDepartments.forEach(System.out::println);
+
+    }
+
+    @Test
+    public void updateDepartmentTest(){
+
+        List<Department> departments = departmentDao.findAll();
+        Assert.assertNotNull(departments);
+        Assert.assertTrue(departments.size() > 0);
+
+        Department department = departments.get(0);
+        department.setDepartmentName("TEST_DEPARTMENT");
+        departmentDao.update(department);
+
+        Optional<Department> realDepartment = departmentDao.findById(department.getDepartmentId());
+        Assert.assertEquals("TEST_DEPARTMENT", realDepartment.get().getDepartmentName());
+
+    }
+
+//    @Test
+//    public void updateDepartmentNotUniqueNameTest(){
+//
+//        List<Department> departments = departmentDao.findAll();
+//        Assert.assertNotNull(departments);
+//        Assert.assertTrue(departments.size() > 0);
+//
+//        Department department = departments.get(0);
+//        department.setDepartmentName(departments.get(1).getDepartmentName());
+//        departmentDao.update(department);
+//    }
 
     @Test
     public void testLogging(){

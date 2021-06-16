@@ -31,6 +31,12 @@ public class DepartmentDaoJdbc implements DepartmentDao {
     private static final String SQL_CREATE_DEPARTMENT =
             "INSERT INTO DEPARTMENT (DEPARTMENT_NAME) VALUES ( :DEPARTMENT_NAME );";
 
+    private static final String SQL_CHECK_DEPARTMENT_NAME =
+            "SELECT COUNT(DEPARTMENT_ID) FROM DEPARTMENT WHERE lower(DEPARTMENT_NAME) = lower(:DEPARTMENT_NAME)";
+
+    private static final String SQL_UPDATE_DEPARTMENT =
+            "UPDATE DEPARTMENT SET DEPARTMENT_NAME = :DEPARTMENT_NAME WHERE DEPARTMENT_ID = :DEPARTMENT_ID;";
+
 
     // Allows you to create dynamic parameterized queries:
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;
@@ -75,20 +81,40 @@ public class DepartmentDaoJdbc implements DepartmentDao {
 
     @Override
     public Integer create(Department department) {
+        long startTime = System.nanoTime();
         LOGGER.debug("Create department: {}", department);
+        // It makes sense to save(protect) our system from unwanted exceptions
+        // We saved our system from sending extra packets over the network
+        if (!isDepartmentNameUnique(department)){
+            LOGGER.warn("Department with the same name already exists in DB.", department);
+            throw new IllegalArgumentException("Department with the same name already exists in DB.");
+        }
         // TO DO: Check if exist a department with the same name
         KeyHolder keyHolder = new GeneratedKeyHolder();
         SqlParameterSource sqlParameterSource = new MapSqlParameterSource("DEPARTMENT_NAME", department.getDepartmentName());
 //      return namedParameterJdbcTemplate.update(SQL_CREATE_DEPARTMENT, sqlParameterSource);
         namedParameterJdbcTemplate.update(SQL_CREATE_DEPARTMENT, sqlParameterSource, keyHolder);
-        return Objects.requireNonNull(keyHolder.getKey().intValue());
+        Integer departmentId = Objects.requireNonNull(keyHolder.getKey().intValue());
+        department.setDepartmentId(departmentId);
+        long stopTime = System.nanoTime();
+        LOGGER.debug("Execution time: {}", stopTime - startTime);
+        return departmentId;
 
+    }
+
+    private boolean isDepartmentNameUnique(Department department){
+    return      namedParameterJdbcTemplate.queryForObject(SQL_CHECK_DEPARTMENT_NAME,
+                new MapSqlParameterSource("DEPARTMENT_NAME", department.getDepartmentName()), Integer.class) == 0;
     }
 
     @Override
     public Integer update(Department department) {
         LOGGER.debug("Update department: {}", department);
-        return null;
+        SqlParameterSource sqlParameterSource =
+                new MapSqlParameterSource("DEPARTMENT_NAME", department.getDepartmentName())
+                .addValue("DEPARTMENT_ID", department.getDepartmentId());
+
+        return namedParameterJdbcTemplate.update(SQL_UPDATE_DEPARTMENT, sqlParameterSource);
     }
 
     @Override
