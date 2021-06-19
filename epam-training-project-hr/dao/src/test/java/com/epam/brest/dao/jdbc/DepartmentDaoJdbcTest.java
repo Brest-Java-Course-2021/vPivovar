@@ -68,8 +68,9 @@ public class DepartmentDaoJdbcTest {
         Department expectedDepartment = departmentDao.findById(999).orElse(null);
     }
 
-    @Test//(IllegalArgumentException.class)
+
     //  Since the tests are not executed in order - the data in the table may be different
+    @Test(expected = IllegalArgumentException.class)
     public void createDepartmentTest() {
 
         List<Department> departments = departmentDao.findAll();
@@ -137,6 +138,20 @@ public class DepartmentDaoJdbcTest {
 
         Optional<Department> realDepartment = departmentDao.findById(department.getDepartmentId());
         Assert.assertEquals("TEST_DEPARTMENT", realDepartment.get().getDepartmentName());
+
+    }
+
+    @Test
+    public void deleteDepartmentTest(){
+
+        List<Department> departments = departmentDao.findAll();
+        Assert.assertNotNull(departments);
+        Assert.assertTrue(departments.size() > 0);
+
+        Integer returnedDeletedId = departmentDao.delete(1);
+
+        List<Department> realDepartments = departmentDao.findAll();
+        Assert.assertEquals(departments.size(), realDepartments.size() + 1);
 
     }
 

@@ -37,6 +37,11 @@ public class DepartmentDaoJdbc implements DepartmentDao {
     private static final String SQL_UPDATE_DEPARTMENT =
             "UPDATE DEPARTMENT SET DEPARTMENT_NAME = :DEPARTMENT_NAME WHERE DEPARTMENT_ID = :DEPARTMENT_ID;";
 
+    private static final String SQL_CHECK_DEPARTMENT_EXISTS =
+            "SELECT COUNT(DEPARTMENT_ID) FROM DEPARTMENT WHERE DEPARTMENT_ID = :DEPARTMENT_ID;";
+
+    private static final String SQL_DELETE_DEPARTMENT =
+            "DELETE FROM DEPARTMENT WHERE DEPARTMENT_ID = :DEPARTMENT_ID;";
 
     // Allows you to create dynamic parameterized queries:
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;
@@ -120,7 +125,23 @@ public class DepartmentDaoJdbc implements DepartmentDao {
     @Override
     public Integer delete(Integer departmentId) {
         LOGGER.debug("Delete department by id: {}", departmentId);
-        return null;
+        if (!isDepartmentRecordByIdExists(departmentId)){
+            LOGGER.warn("Department with such departmentId is not exists in DB.", departmentId);
+            throw new IllegalArgumentException("Department with such departmentId is not exists in DB.");
+        }
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        SqlParameterSource sqlParameterSource = new MapSqlParameterSource("DEPARTMENT_ID", departmentId);
+
+        //      Integer returnedDepartmentId = Objects.requireNonNull(keyHolder.getKey().intValue());
+//      return  returnedDepartmentId;
+
+        return namedParameterJdbcTemplate.update(SQL_DELETE_DEPARTMENT, sqlParameterSource );
+
+    }
+
+    private boolean isDepartmentRecordByIdExists(Integer id){
+        return      namedParameterJdbcTemplate.queryForObject(SQL_CHECK_DEPARTMENT_EXISTS,
+                new MapSqlParameterSource("DEPARTMENT_ID", id), Integer.class) > 0;
     }
 
 
