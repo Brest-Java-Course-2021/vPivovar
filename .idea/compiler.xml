@@ -7,10 +7,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="help" />
-        <module name="price-calc-OOP" />
-        <module name="model" />
+        <module name="web-app" />
         <module name="dao" />
         <module name="price-calc-Simple" />
+        <module name="price-calc-OOP" />
+        <module name="model" />
         <module name="test-db" />
       </profile>
     </annotationProcessing>
@@ -25,6 +26,7 @@
       <module name="price-calc-Simple" target="11" />
       <module name="test-db" target="11" />
       <module name="vPivovar" target="1.5" />
+      <module name="web-app" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -32,6 +34,7 @@
       <module name="dao" options="-Xlint:unchecked" />
       <module name="model" options="-Xlint:unchecked" />
       <module name="test-db" options="-Xlint:unchecked" />
+      <module name="web-app" options="-Xlint:unchecked" />
     </option>
   </component>
 </project>
